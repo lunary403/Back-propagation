@@ -147,34 +147,7 @@ def update_weights(network, row, l_rate, bias=True):
 
 
 
-# def train_network_sigmoid(network, train, l_rate, n_epoch, n_outputs):
-#     for epoch in range(n_epoch):
-#         sum_error = 0
-#         for row in train:
-#             outputs = forward_propagate_sigmoid(network, row)
-#             expected = [0] * n_outputs
-#             expected[int(row[-1])] = 1
-#             sum_error += sum((expected[i] - outputs[i]) ** 2 for i in range(len(expected)))
-#             acc = (100 - sum_error)
-#             backward_propagate_error_sigmoid(network, expected)
-#             update_weights(network, row, l_rate)
-#         print('>epoch=%d, lrate=%.3f, error=%.3f, acc=%.3f' % (epoch, l_rate, sum_error, acc))
 
-
-
-# def train_network_tanh(network, train, l_rate, n_epoch, n_outputs):
-#     for epoch in range(n_epoch):
-#         sum_error = 0
-#         for row in train:
-#             outputs = forward_propagate_tanh(network, row)
-#             expected = [0] * n_outputs
-#             expected[int(row[-1])] = 1
-#             sum_error += sum((expected[i] - outputs[i]) ** 2 for i in range(len(expected)))
-#             acc = (100 - sum_error)
-#             backward_propagate_error_tanh(network, expected)
-#             update_weights(network, row, l_rate)
-#
-#         print('>epoch=%d, lrate=%.3f, error=%.3f, acc=%.3f' % (epoch, l_rate, sum_error, acc))
 
 def train_network_sigmoid(network, train, l_rate, n_epoch, n_outputs):
     for epoch in range(n_epoch):
