@@ -252,3 +252,104 @@ def train_network_tanh(network, train, l_rate, n_epoch, n_outputs):
     print('FN:', false_negative)
     overall_acc = (true_positive + true_negative)/(true_positive+true_negative+false_positive + false_negative)
     print("overall accuracy: ", overall_acc)
+
+
+
+def predict_network_sigmoid(network, test, l_rate, n_epoch, n_outputs):
+    for epoch in range(n_epoch):
+        true_positive = 0
+        true_negative = 0
+        false_positive = 0
+        false_negative = 0
+        sum_error = 0
+
+        for row in test:
+            # Forward propagation
+            outputs = forward_propagate_sigmoid(network, row)
+
+            # Convert network output to binary predictions (0 or 1)
+            predicted = [1 if output > 0.5 else 0 for output in outputs]
+
+            # Convert the true label to binary format
+            expected = [0] * n_outputs
+            expected[int(row[-1])] = 1
+
+            # Update confusion matrix
+            for i in range(len(expected)):
+                if expected[i] == 1 and predicted[i] == 1:
+                    true_positive += 1
+                elif expected[i] == 0 and predicted[i] == 0:
+                    true_negative += 1
+                elif expected[i] == 0 and predicted[i] == 1:
+                    false_positive += 1
+                elif expected[i] == 1 and predicted[i] == 0:
+                    false_negative += 1
+
+            # Calculate error for the current row
+            sum_error += sum((expected[i] - outputs[i]) ** 2 for i in range(len(expected)))
+
+
+
+        # Output confusion matrix components at the end
+        print('>epoch=%d, lrate=%.3f, error=%.3f' % (
+            epoch, l_rate, sum_error))
+
+    # Output final confusion matrix components
+    print('Final Confusion Matrix:')
+    print('TP:', true_positive)
+    print('TN:', true_negative)
+    print('FP:', false_positive)
+    print('FN:', false_negative)
+    overall_acc = (true_positive + true_negative)/(true_positive+true_negative+false_positive + false_negative)
+    print("overall accuracy: ", overall_acc)
+
+
+
+def predict_network_tanh(network, test, l_rate, n_epoch, n_outputs):
+    for epoch in range(n_epoch):
+        true_positive = 0
+        true_negative = 0
+        false_positive = 0
+        false_negative = 0
+        sum_error = 0
+
+        for row in test:
+            # Forward propagation
+            outputs = forward_propagate_tanh(network, row)
+
+            # Convert network output to binary predictions (0 or 1)
+            predicted = [1 if output > 0.5 else 0 for output in outputs]
+
+            # Convert the true label to binary format
+            expected = [0] * n_outputs
+            expected[int(row[-1])] = 1
+
+            # Update confusion matrix
+            for i in range(len(expected)):
+                if expected[i] == 1 and predicted[i] == 1:
+                    true_positive += 1
+                elif expected[i] == 0 and predicted[i] == 0:
+                    true_negative += 1
+                elif expected[i] == 0 and predicted[i] == 1:
+                    false_positive += 1
+                elif expected[i] == 1 and predicted[i] == 0:
+                    false_negative += 1
+
+            # Calculate error for the current row
+            sum_error += sum((expected[i] - outputs[i]) ** 2 for i in range(len(expected)))
+
+
+
+        # Output confusion matrix components at the end
+        print('>epoch=%d, lrate=%.3f, error=%.3f' % (
+            epoch, l_rate, sum_error))
+
+    # Output final confusion matrix components
+    print('Final Confusion Matrix:')
+    print('TP:', true_positive)
+    print('TN:', true_negative)
+    print('FP:', false_positive)
+    print('FN:', false_negative)
+    overall_acc = (true_positive + true_negative)/(true_positive+true_negative+false_positive + false_negative)
+    print("overall accuracy: ", overall_acc)
+
