@@ -21,6 +21,7 @@ def submit():
 
         network = initialize_network(5, neurons_in_layer,3, hidden_layers, bias)
         train_network_sigmoid(network, X_train_list, learning_rate, epochs, 3)
+        predict_network_sigmoid(network, X_test_list, learning_rate, epochs, 3)
 
 
     elif act_func == 2:
@@ -33,6 +34,7 @@ def submit():
 
         network = initialize_network(5, neurons_in_layer,3, hidden_layers, bias)
         train_network_tanh(network, X_train_list, learning_rate, epochs, 3)
+        predict_network_tanh(network, X_test_list, learning_rate, epochs, 3)
 
 
 
